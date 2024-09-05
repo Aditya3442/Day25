@@ -1,0 +1,43 @@
+class Solution {
+    public static int findgcd(int num1,int num2){
+        if(num1==0)
+            return num2;
+        return findgcd(num2%num1,num1);
+    }
+    public String fractionAddition(String exp) {      
+        int num=0;
+        int denom=1;
+        int i=0;
+        while(i<exp.length()){
+            
+            int currnum=0;
+            int currdenom=0;
+            boolean tag=false;
+            if(exp.charAt(i)=='-' || exp.charAt(i)=='+'){
+                if(exp.charAt(i)=='-')
+                    tag=true;
+            i++;    
+            }
+            while(Character.isDigit(exp.charAt(i))){
+                int x=exp.charAt(i)-'0';
+                currnum=currnum*10+x;
+                i++;
+            }
+            if(tag==true)
+                currnum*=-1;
+            i++;
+            while(i<exp.length() && Character.isDigit(exp.charAt(i))){
+                int x=exp.charAt(i)-'0';
+                currdenom=currdenom*10+x;
+                i++;
+            }
+            num=num*currdenom+denom*currnum;
+            denom=denom*currdenom;
+      }
+      int gcd=Math.abs(findgcd(num,denom));
+      num/=gcd;
+      denom/=gcd;
+        
+      return num+"/"+denom;  
+    }
+}
