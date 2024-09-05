@@ -1,0 +1,31 @@
+class Solution {
+    public int[] missingRolls(int[] rolls, int mean, int n) {
+        int[] result=new int[n];
+        int sum=0;
+        for(int i=0;i<rolls.length;i++){
+            sum+=rolls[i];
+        }
+        
+        int restSum=mean*(n+rolls.length)-sum;
+        int eachNum=restSum/n;
+        int extraSum=restSum%n;
+        
+        if(restSum<n)
+            return new int[0];
+        if(eachNum>6)
+            return new int[0];
+        if(extraSum!=0 && eachNum+1>6)
+            return new int[0];
+        
+        int i=0;
+        while(i<extraSum){
+            result[i]=eachNum+1;
+            i++;
+        }
+        while(i<n){
+            result[i]=eachNum;
+            i++;
+        }
+        return result;
+    }
+}
